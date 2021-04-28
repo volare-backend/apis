@@ -8,6 +8,7 @@ service UserService {
   rpc SignOutUser (SignOutUserRequest) returns (SignOutUserResponse);
   rpc GetUser (GetUserRequest) returns (GetUserResponse);
   rpc UpdateUser (UpdateUserRequest) returns (UpdateUserResponse);
+  rpc DeleteUser (DeleteUserRequest) returns (DeleteUserResponse);
 }
 
 message User {
@@ -30,7 +31,7 @@ message SignUpUserRequest {
 }
 
 message SignUpUserResponse {
-  string uid = 1;
+  User user = 1;
 }
 
 message SignInUserRequest {
@@ -57,4 +58,12 @@ message UpdateUserRequest {
    User user = 1;
 }
 
-message UpdateUserResponse {}
+message UpdateUserResponse {
+  User user = 1;
+}
+
+message DeleteUserRequest {
+  string uid = 1;
+}
+
+message DeleteUserResponse {}

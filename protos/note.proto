@@ -10,7 +10,8 @@ service NoteService {
   rpc GetNote (GetNoteRequest) returns (GetNoteResponse);
   rpc UpdateNote (UpdateNoteRequest) returns (UpdateNoteResponse);
   rpc DeleteNote (DeleteNoteRequest) returns (DeleteNoteResponse);
-  rpc GetAllNote (GetAllNoteRequest) returns (GetAllNoteResponse);
+  rpc GetNotes (GetNotesRequest) returns (GetNotesResponse);
+  rpc SerarchNotes (SearchNotesRequest) return (SearchNotesResponse)
 }
 
 message Note {
@@ -29,13 +30,13 @@ message Note {
   int32 mentor_support_score = 13;
   int32 fun_score = 14;
   int32 content_score = 15;
+  InternTech intern_tech = 16;
   google.protobuf.Timestamp      updated_at= 16;
   google.protobuf.Timestamp      created_at= 17;
 }
 
 message InternTech {
   string  id = 1;
-  Note note = 2;
   repeated Language language = 3;
   repeated Framework framework = 4;
   repeated Tool tool = 5;
@@ -88,7 +89,9 @@ message CreateNoteRequest {
   Note note = 1;
 }
 
-message CreateNoteResponse {}
+message CreateNoteResponse {
+  Note note = 1;
+}
 
 message GetNoteRequest {
   string id = 1;
@@ -110,8 +113,16 @@ message DeleteNoteRequest {
 
 message DeleteNoteResponse {}
 
-message GetAllNoteRequest {}
+message GetNotesRequest {}
 
-message GetAllNoteResponse {
+message GetNotesResponse {
+  repeated Note note = 1;
+}
+
+message SerarchNotesRequest {
+  Note note = 1;
+}
+
+message SerarchNotesResponse {
   repeated Note note = 1;
 }
