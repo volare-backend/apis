@@ -1,6 +1,6 @@
 syntax = "proto3";
 package service;
-option go_package = "service";
+option go_package = "enterprise";
 import "google/protobuf/timestamp.proto";
 
 service EnterpriseService {
