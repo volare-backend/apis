@@ -1,0 +1,54 @@
+syntax = "proto3";
+package protos;
+option go_package = "user";
+
+service UserService {
+  rpc SignUpUser (SignUpUserRequest) returns (SignUpUserResponse);
+  rpc SignInUser (SignInUserRequest) returns (SignInUserResponse);
+  rpc SignOutUser (SignOutUserRequest) returns (SignOutUserResponse);
+  rpc GetUser (GetUserRequest) returns (GetUserResponse);
+  rpc UpdateUser (UpdateUserRequest) returns (UpdateUserResponse);
+}
+
+message User {
+  string uid = 1;
+  string name = 2;
+  string imageURL = 3;git
+}
+
+message SignUpUserRequest {
+  string name = 1;
+}
+
+message SignUpUserResponse {
+  string uid = 1;
+}
+
+message SignInUserRequest {
+  string uid = 1;
+}
+
+message SignInUserResponse {}
+
+message SignOutUserRequest {
+  string uid = 1;
+}
+
+message SignOutUserResponse {}
+
+message GetUserRequest {
+  string uid = 1;
+}
+
+message GetUserResponse {
+  User user = 1;
+}
+
+message UpdateUserRequest {
+  string uid = 1;
+  string name = 2;
+  string imageURL = 3;
+  // User user = 1; ????
+}
+
+message UpdateUserResponse {}

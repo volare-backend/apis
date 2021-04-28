@@ -1,0 +1,91 @@
+syntax = "proto3";
+package service;
+option go_package = "blog";
+import "google/protobuf/timestamp.proto";
+
+
+service BlogService {
+  rpc CreateBlog (CreateBlogRequest) returns (CreateBlogResponse);
+  rpc GetBlog (GetBlogRequest) returns (GetBlogResponse);
+  rpc UpdateBlog (UpdateBlogRequest) returns (UpdateBlogResponse);
+  rpc DeleteBlog (DeleteBlogRequest) returns (DeleteBlogResponse);
+  rpc GetAllBlog (GetAllBlogRequest) returns (GetAllBlogResponse);
+}
+
+
+
+message Profile {
+  string user_id = 1;
+  string work_experience = 2;
+  string university = 3;
+  string department = 4;
+  string graduation_year = 5;
+  google.protobuf.Timestamp      UpdatedAt=4;
+  google.protobuf.Timestamp      CreatedAt=5;
+}
+
+message Enterprise {
+  string id = 1;
+  string name = 2;
+  string imageURL = 3;
+  string description = 4;
+  string homepage = 5;
+}
+
+message Blog {
+  string id = 1;
+  string user_id = 2;
+  string title = 3;
+  string intern_name = 4;
+  string enterprise_id = 5;
+  string position = 6;
+  string is_online = 7;
+  string join_year = 8;
+  string wage = 9;
+  string job_start_date = 10;
+  string job_end_date = 11;
+  string is_event = 12;
+  string mentor_support_score = 13;
+  string fun_score = 14;
+  string content_score = 15;
+}
+
+message InternTech {
+  string blog_id = 1;
+  string language = 2;
+  string framework = 3;
+  string tool = 4;
+  string other_skill = 5;
+}
+
+message CreateBlogRequest {
+  Blog blog = 1;
+}
+
+message CreateBlogResponse {}
+
+message GetBlogRequest {
+  string id = 1;
+}
+
+message GetBlogResponse {
+  Blog blog = 1;
+}
+
+message UpdateBlogRequest {
+  Blog blog = 1;
+}
+
+message UpdateBlogResponse {}
+
+message DeleteBlogRequest {
+  string id = 1;
+}
+
+message DeleteBlogResponse {}
+
+message GetAllBlogRequest {}
+
+message GetAllBlogResponse {
+  repeated Blog blog = 1;
+}
