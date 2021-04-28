@@ -1,5 +1,5 @@
 syntax = "proto3";
-package protos;
+package service;
 option go_package = "user";
 
 service UserService {
@@ -13,7 +13,16 @@ service UserService {
 message User {
   string uid = 1;
   string name = 2;
-  string imageURL = 3;git
+  string imageURL = 3;
+  Profile profile = 4;
+}
+
+message Profile {
+  string id = 1;
+  int32 work_experience = 2;
+  string university = 3;
+  string department = 4;
+  string graduation_year = 5;
 }
 
 message SignUpUserRequest {
@@ -45,10 +54,7 @@ message GetUserResponse {
 }
 
 message UpdateUserRequest {
-  string uid = 1;
-  string name = 2;
-  string imageURL = 3;
-  // User user = 1; ????
+   User user = 1;
 }
 
 message UpdateUserResponse {}

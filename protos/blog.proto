@@ -1,7 +1,9 @@
 syntax = "proto3";
-package protos;
+package service;
 option go_package = "blog";
 import "google/protobuf/timestamp.proto";
+import "user.proto";
+import "enterprise.proto";
 
 service BlogService {
   rpc CreateBlog (CreateBlogRequest) returns (CreateBlogResponse);
@@ -11,50 +13,75 @@ service BlogService {
   rpc GetAllBlog (GetAllBlogRequest) returns (GetAllBlogResponse);
 }
 
-
-
-message Profile {
-  string user_id = 1;
-  string work_experience = 2;
-  string university = 3;
-  string department = 4;
-  string graduation_year = 5;
-  google.protobuf.Timestamp      UpdatedAt=4;
-  google.protobuf.Timestamp      CreatedAt=5;
-}
-
-message Enterprise {
-  string id = 1;
-  string name = 2;
-  string imageURL = 3;
-  string description = 4;
-  string homepage = 5;
-}
-
 message Blog {
   string id = 1;
-  string user_id = 2;
-  string title = 3;
-  string intern_name = 4;
-  string enterprise_id = 5;
+  User user = 2;
+  Enterprise enterprise = 3;
+  string title = 4;
+  string intern_name = 5;
   string position = 6;
-  string is_online = 7;
-  string join_year = 8;
-  string wage = 9;
+  bool is_online = 7;
+  int32 join_year = 8;
+  int32 wage = 9;
   string job_start_date = 10;
   string job_end_date = 11;
-  string is_event = 12;
-  string mentor_support_score = 13;
-  string fun_score = 14;
-  string content_score = 15;
+  bool is_event = 12;
+  int32 mentor_support_score = 13;
+  int32 fun_score = 14;
+  int32 content_score = 15;
+  google.protobuf.Timestamp      updated_at= 16;
+  google.protobuf.Timestamp      created_at= 17;
 }
 
 message InternTech {
-  string blog_id = 1;
-  string language = 2;
-  string framework = 3;
-  string tool = 4;
-  string other_skill = 5;
+  string  id = 1;
+  Blog blog = 2;
+  repeated Language language = 3;
+  repeated Framework framework = 4;
+  repeated Tool tool = 5;
+  repeated string other_skill = 6;
+}
+
+enum Language {
+  Go = 0;
+  Ruby = 1;
+  Python = 2;
+  PHP = 3;
+  JavaScript = 4;
+  NodeJS = 5;
+  TypeScript = 6;
+  HTML_CSS = 7;
+  R = 8;
+  Java = 9;
+  Kotlin = 10;
+  Scala = 11;
+  Rust = 12;
+  Elixir = 13;
+  C =  14;
+  OTHER = 15;
+}
+
+enum Framework {
+  React = 0;
+  Vue = 1;
+  Ruby_on_Rails = 2;
+  Flask = 3;
+  Django = 4;
+  Svelte = 5;
+  Express = 6;
+  CakePHP = 7;
+  Laravel = 8;
+  SpringBoot = 9;
+  Rocket = 10;
+}
+
+enum Tool {
+  Git = 0;
+  AWS = 1;
+  GCP = 2;
+  Azure = 3;
+  Kubernetes = 4;
+  OnPremise = 5;
 }
 
 message CreateBlogRequest {
