@@ -14,13 +14,13 @@ service UserService {
 message User {
   string uid = 1;
   string name = 2;
-  string imageURL = 3;
+  string image_url = 3;
   Profile profile = 4;
 }
 
 message Profile {
   string id = 1;
-  int32 work_experience = 2;
+  uint32 work_experience = 2;
   string university = 3;
   string department = 4;
   string graduation_year = 5;

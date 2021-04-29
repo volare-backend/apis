@@ -22,17 +22,18 @@ message Note {
   string intern_name = 5;
   string position = 6;
   bool is_online = 7;
-  int32 join_year = 8;
-  int32 wage = 9;
+  uint32 join_year = 8;
+  uint32 wage = 9;
   string job_start_date = 10;
   string job_end_date = 11;
   bool is_event = 12;
-  int32 mentor_support_score = 13;
-  int32 fun_score = 14;
-  int32 content_score = 15;
-  InternTech intern_tech = 16;
-  google.protobuf.Timestamp      updated_at= 16;
-  google.protobuf.Timestamp      created_at= 17;
+  uint32 mentor_support_score = 13;
+  uint32 fun_score = 14;
+  uint32 content_score = 15;
+  string text = 16;
+  InternTech intern_tech = 17;
+  google.protobuf.Timestamp      updated_at= 18;
+  google.protobuf.Timestamp      created_at= 19;
 }
 
 message InternTech {

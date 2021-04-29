@@ -14,7 +14,7 @@ service EnterpriseService {
 message Enterprise {
   string id = 1;
   string name = 2;
-  string imageURL = 3;
+  string image_url = 3;
   string description = 4;
   string homepage = 5;
 }
