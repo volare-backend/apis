@@ -2,13 +2,42 @@ syntax = "proto3";
 package service;
 option go_package = "enterprise";
 import "google/protobuf/timestamp.proto";
+import "google/protobuf/empty.proto";
+import "google/api/annotations.proto";
 
 service EnterpriseService {
-  rpc CreateEnterprise (CreateEnterpriseRequest) returns (CreateEnterpriseResponse);
-  rpc GetEnterprise (GetEnterpriseRequest) returns (GetEnterpriseResponse);
-  rpc UpdateEnterprise (UpdateEnterpriseRequest) returns (UpdateEnterpriseResponse);
-  rpc DeleteEnterprise (DeleteEnterpriseRequest) returns (DeleteEnterpriseResponse);
-  rpc GetAllEnterprise (GetAllEnterpriseRequest) returns (GetAllEnterpriseResponse);
+  rpc CreateEnterprise (CreateEnterpriseRequest) returns (CreateEnterpriseResponse) {
+    option (google.api.http) = {
+      post: "/enterprise/create"
+      body: "*"
+    };
+  }
+
+  rpc GetEnterprise (GetEnterpriseRequest) returns (GetEnterpriseResponse) {
+    option (google.api.http) = {
+      get: "/enterprise/get"
+    };
+  }
+
+  rpc UpdateEnterprise (UpdateEnterpriseRequest) returns (UpdateEnterpriseResponse) {
+    option (google.api.http) = {
+      put: "/enterprise/update"
+      body: "*"
+    };
+  }
+
+  rpc DeleteEnterprise (DeleteEnterpriseRequest) returns (google.protobuf.Empty) {
+    option (google.api.http) = {
+      delete: "/enterprise/delete"
+      body: "*"
+    };
+  }
+
+  rpc GetAllEnterprise (GetAllEnterpriseRequest) returns (GetAllEnterpriseResponse) {
+    option (google.api.http) = {
+      get: "/enterprise/list"
+    };
+  }
 }
 
 message Enterprise {

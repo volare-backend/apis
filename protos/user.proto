@@ -1,14 +1,28 @@
 syntax = "proto3";
 package service;
 option go_package = "user";
+import "google/protobuf/empty.proto";
+import "google/api/annotations.proto";
+
 
 service UserService {
-  rpc SignUpUser (SignUpUserRequest) returns (SignUpUserResponse);
-  rpc SignInUser (SignInUserRequest) returns (SignInUserResponse);
-  rpc SignOutUser (SignOutUserRequest) returns (SignOutUserResponse);
-  rpc GetUser (GetUserRequest) returns (GetUserResponse);
-  rpc UpdateUser (UpdateUserRequest) returns (UpdateUserResponse);
-  rpc DeleteUser (DeleteUserRequest) returns (DeleteUserResponse);
+  rpc GetUser (GetUserRequest) returns (GetUserResponse) {
+    option (google.api.http) = {
+      get: "/user/get"
+    };
+  }
+  rpc UpdateUser (UpdateUserRequest) returns (UpdateUserResponse) {
+    option (google.api.http) = {
+      put: "/user/update"
+      body: "*"
+    };
+  }
+  rpc DeleteUser (DeleteUserRequest) returns (google.protobuf.Empty) {
+    option (google.api.http) = {
+      delete: "/user/delete"
+      body: "*"
+    };
+  }
 }
 
 message User {
@@ -25,26 +39,6 @@ message Profile {
   string department = 4;
   string graduation_year = 5;
 }
-
-message SignUpUserRequest {
-  string name = 1;
-}
-
-message SignUpUserResponse {
-  User user = 1;
-}
-
-message SignInUserRequest {
-  string uid = 1;
-}
-
-message SignInUserResponse {}
-
-message SignOutUserRequest {
-  string uid = 1;
-}
-
-message SignOutUserResponse {}
 
 message GetUserRequest {
   string uid = 1;
@@ -65,5 +59,3 @@ message UpdateUserResponse {
 message DeleteUserRequest {
   string uid = 1;
 }
-
-message DeleteUserResponse {}

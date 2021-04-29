@@ -2,16 +2,50 @@ syntax = "proto3";
 package service;
 option go_package = "note";
 import "google/protobuf/timestamp.proto";
+import "google/protobuf/empty.proto";
+import "google/api/annotations.proto";
 import "user.proto";
 import "enterprise.proto";
 
 service NoteService {
-  rpc CreateNote (CreateNoteRequest) returns (CreateNoteResponse);
-  rpc GetNote (GetNoteRequest) returns (GetNoteResponse);
-  rpc UpdateNote (UpdateNoteRequest) returns (UpdateNoteResponse);
-  rpc DeleteNote (DeleteNoteRequest) returns (DeleteNoteResponse);
-  rpc GetNotes (GetNotesRequest) returns (GetNotesResponse);
-  rpc SerarchNotes (SearchNotesRequest) return (SearchNotesResponse)
+  rpc CreateNote (CreateNoteRequest) returns (CreateNoteResponse) {
+    option (google.api.http) = {
+      post: "/note/create"
+      body: "*"
+    };
+  }
+
+  rpc GetNote (GetNoteRequest) returns (GetNoteResponse) {
+    option (google.api.http) = {
+      get: "/note/get"
+    };
+  }
+
+  rpc UpdateNote (UpdateNoteRequest) returns (UpdateNoteResponse) {
+    option (google.api.http) = {
+      put: "/note/update"
+      body: "*"
+    };
+  }
+
+  rpc DeleteNote (DeleteNoteRequest) returns (google.protobuf.Empty) {
+    option (google.api.http) = {
+      delete: "/note/delete"
+      body: "*"
+    };
+  }
+
+  rpc GetNotes (GetNotesRequest) returns (GetNotesResponse) {
+    option (google.api.http) = {
+      get: "/notes"
+    };
+  }
+
+  rpc SearchNotes (SearchNotesRequest) returns (SearchNotesResponse) {
+    option (google.api.http) = {
+      get: "/notes/search"
+    };
+  }
 }
 
 message Note {
@@ -38,52 +72,10 @@ message Note {
 
 message InternTech {
   string  id = 1;
-  repeated Language language = 3;
-  repeated Framework framework = 4;
-  repeated Tool tool = 5;
+  repeated string language = 3;
+  repeated string framework = 4;
+  repeated string tool = 5;
   repeated string other_skill = 6;
-
-  enum Language {
-    Go = 0;
-    Ruby = 1;
-    Python = 2;
-    PHP = 3;
-    JavaScript = 4;
-    NodeJS = 5;
-    TypeScript = 6;
-    HTML_CSS = 7;
-    R = 8;
-    Java = 9;
-    Kotlin = 10;
-    Scala = 11;
-    Rust = 12;
-    Elixir = 13;
-    C =  14;
-    OTHER = 15;
-  }
-
-  enum Framework {
-    React = 0;
-    Vue = 1;
-    Ruby_on_Rails = 2;
-    Flask = 3;
-    Django = 4;
-    Svelte = 5;
-    Express = 6;
-    CakePHP = 7;
-    Laravel = 8;
-    SpringBoot = 9;
-    Rocket = 10;
-  }
-
-  enum Tool {
-    Git = 0;
-    AWS = 1;
-    GCP = 2;
-    Azure = 3;
-    Kubernetes = 4;
-    OnPremise = 5;
-  }
 }
 
 message CreateNoteRequest {
@@ -120,10 +112,10 @@ message GetNotesResponse {
   repeated Note note = 1;
 }
 
-message SerarchNotesRequest {
+message SearchNotesRequest {
   Note note = 1;
 }
 
-message SerarchNotesResponse {
+message SearchNotesResponse {
   repeated Note note = 1;
 }
