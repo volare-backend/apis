@@ -35,7 +35,7 @@ service NoteService {
     };
   }
 
-  rpc GetNotes (GetNotesRequest) returns (GetNotesResponse) {
+  rpc ListNotes (ListNotesRequest) returns (ListNotesResponse) {
     option (google.api.http) = {
       get: "/notes"
     };
@@ -106,9 +106,9 @@ message DeleteNoteRequest {
 
 message DeleteNoteResponse {}
 
-message GetNotesRequest {}
+message ListNotesRequest {}
 
-message GetNotesResponse {
+message ListNotesResponse {
   repeated Note note = 1;
 }
 

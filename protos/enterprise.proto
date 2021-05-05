@@ -33,7 +33,7 @@ service EnterpriseService {
     };
   }
 
-  rpc GetAllEnterprise (GetAllEnterpriseRequest) returns (GetAllEnterpriseResponse) {
+  rpc ListAllEnterprises (ListAllEnterprisesRequest) returns (ListAllEnterprisesResponse) {
     option (google.api.http) = {
       get: "/enterprise/list"
     };
@@ -74,8 +74,8 @@ message DeleteEnterpriseRequest {
 
 message DeleteEnterpriseResponse {}
 
-message GetAllEnterpriseRequest {}
+message ListAllEnterprisesRequest {}
 
-message GetAllEnterpriseResponse {
+message ListAllEnterprisesResponse {
   repeated Enterprise enterprise = 1;
 }
