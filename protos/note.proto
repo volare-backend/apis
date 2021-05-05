@@ -65,17 +65,15 @@ message Note {
   uint32 fun_score = 14;
   uint32 content_score = 15;
   string text = 16;
-  InternTech intern_tech = 17;
+  repeated Tech tech = 17;
   google.protobuf.Timestamp      updated_at= 18;
   google.protobuf.Timestamp      created_at= 19;
 }
 
-message InternTech {
+message Tech {
   string  id = 1;
-  repeated string language = 3;
-  repeated string framework = 4;
-  repeated string tool = 5;
-  repeated string other_skill = 6;
+  string  name = 2;
+  uint32  type = 3;
 }
 
 message CreateNoteRequest {
