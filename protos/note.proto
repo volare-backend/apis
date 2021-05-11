@@ -1,6 +1,6 @@
 syntax = "proto3";
 package service;
-option go_package = "note";
+option go_package = "./service/note";
 import "google/protobuf/timestamp.proto";
 import "google/protobuf/empty.proto";
 import "google/api/annotations.proto";
@@ -31,7 +31,6 @@ service NoteService {
   rpc DeleteNote (DeleteNoteRequest) returns (google.protobuf.Empty) {
     option (google.api.http) = {
       delete: "/note/delete"
-      body: "*"
     };
   }
 

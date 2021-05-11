@@ -1,7 +1,6 @@
 syntax = "proto3";
 package service;
-option go_package = "enterprise";
-import "google/protobuf/timestamp.proto";
+option go_package = "./service/enterprise";
 import "google/protobuf/empty.proto";
 import "google/api/annotations.proto";
 
@@ -29,7 +28,6 @@ service EnterpriseService {
   rpc DeleteEnterprise (DeleteEnterpriseRequest) returns (google.protobuf.Empty) {
     option (google.api.http) = {
       delete: "/enterprise/delete"
-      body: "*"
     };
   }
 
