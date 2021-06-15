@@ -10,31 +10,31 @@ import "enterprise.proto";
 service NoteService {
   rpc CreateNote (CreateNoteRequest) returns (CreateNoteResponse) {
     option (google.api.http) = {
-      post: "/note/create"
+      post: "/notes"
       body: "*"
     };
   }
 
   rpc GetNote (GetNoteRequest) returns (GetNoteResponse) {
     option (google.api.http) = {
-      get: "/note/get"
+      get: "/notes/{id}"
     };
   }
 
   rpc UpdateNote (UpdateNoteRequest) returns (UpdateNoteResponse) {
     option (google.api.http) = {
-      put: "/note/update"
+      put: "/notes/{id}"
       body: "*"
     };
   }
 
   rpc DeleteNote (DeleteNoteRequest) returns (google.protobuf.Empty) {
     option (google.api.http) = {
-      delete: "/note/delete"
+      delete: "/notes/{id}"
     };
   }
 
-  rpc ListNotes (ListNotesRequest) returns (ListNotesResponse) {
+  rpc ListNotes (google.protobuf.Empty) returns (ListNotesResponse) {
     option (google.api.http) = {
       get: "/notes"
     };
@@ -47,32 +47,50 @@ service NoteService {
   }
 }
 
+enum InternStyle {
+  Job = 0;
+  Event = 1;
+}
+
+message Position {
+  string id = 1;
+  string name = 2;
+}
+
 message Note {
   string id = 1;
-  User user = 2;
-  Enterprise enterprise = 3;
+  User author = 2;
+  Enterprise company = 3;
   string title = 4;
   string intern_name = 5;
-  string position = 6;
+  Position position = 6;
   bool is_online = 7;
-  uint32 join_year = 8;
-  uint32 wage = 9;
-  string job_start_date = 10;
-  string job_end_date = 11;
-  bool is_event = 12;
-  uint32 mentor_support_score = 13;
-  uint32 fun_score = 14;
-  uint32 content_score = 15;
-  string text = 16;
-  repeated Tech tech = 17;
-  google.protobuf.Timestamp      updated_at= 18;
-  google.protobuf.Timestamp      created_at= 19;
+  InternStyle intern_style = 8; // 開催形式
+  uint32 grade = 9; // 当時の学年
+  Level level = 10; // 当時のレベル
+  uint32 wage = 11;
+  google.protobuf.Timestamp job_start_date = 12;
+  google.protobuf.Timestamp job_end_date = 13;
+  uint32 mentor_support_score = 14;
+  uint32 fun_score = 15;
+  uint32 content_score = 16;
+  string content = 17;
+  repeated Tech tech = 18;
+  google.protobuf.Timestamp publish_at = 19;
+  google.protobuf.Timestamp updated_at = 20;
+  google.protobuf.Timestamp created_at = 21;
+}
+
+enum TechType {
+  Language = 0;
+  Framework = 1;
+  Tool = 2;
 }
 
 message Tech {
   string  id = 1;
   string  name = 2;
-  uint32  type = 3;
+  TechType  type = 3;
 }
 
 message CreateNoteRequest {
@@ -103,10 +121,11 @@ message DeleteNoteRequest {
 
 message DeleteNoteResponse {}
 
-message ListNotesRequest {}
-
 message ListNotesResponse {
-  repeated Note note = 1;
+  repeated Note notes = 1;
+  uint32 current_page = 2;
+  uint32 total_pages = 3;
+  string next_id = 4;
 }
 
 message SearchNotesRequest {
@@ -115,4 +134,7 @@ message SearchNotesRequest {
 
 message SearchNotesResponse {
   repeated Note note = 1;
+  uint32 current_page = 2;
+  uint32 total_pages = 3;
+  string next_id = 4;
 }
