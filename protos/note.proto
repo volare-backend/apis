@@ -6,6 +6,7 @@ import "google/protobuf/empty.proto";
 import "google/api/annotations.proto";
 import "user.proto";
 import "enterprise.proto";
+import "search.proto";
 
 service NoteService {
   rpc CreateNote (CreateNoteRequest) returns (CreateNoteResponse) {
@@ -154,8 +155,33 @@ message ListNotesResponse {
   string next_id = 4;
 }
 
+enum Season {
+  Spring = 0;
+  Summer = 1;
+  Autumn = 2;
+  Winter = 3;
+}
+
+message SearchOption {
+  string id = 1;
+  oneof option_optional {
+    OptionType option = 2;
+  }
+  oneof intern_style_optional {
+    InternStyle intern_style = 3; // 開催形式
+  }
+  oneof season_optional {
+    Season season = 4;
+  }
+  oneof level_optional {
+    uint32 level = 5;
+  }
+}
+
 message SearchNotesRequest {
-  NoteRequest note = 1;
+  string next_id = 1;
+  repeated SearchOption options = 2;
+
 }
 
 message SearchNotesResponse {
