@@ -4,7 +4,6 @@ option go_package = "./service/user";
 import "google/protobuf/empty.proto";
 import "google/api/annotations.proto";
 
-
 service UserService {
   rpc GetUser (GetUserRequest) returns (GetUserResponse) {
     option (google.api.http) = {
@@ -24,23 +23,24 @@ service UserService {
   }
 }
 
-message User {
-  string uid = 1;
-  string name = 2;
-  string image_url = 3;
-  Profile profile = 4;
+message Level {
+  uint32 value = 1;
+  string description = 2;
 }
 
-message Profile {
+message User {
   string id = 1;
-  uint32 work_experience = 2;
-  string university = 3;
-  string department = 4;
-  string graduation_year = 5;
+  string name = 2;
+  string image_url = 3;
+  Level level = 4;
+  string university = 5;
+  string department = 6;
+  string graduation_year = 7;
+
 }
 
 message GetUserRequest {
-  string uid = 1;
+  string id = 1;
 }
 
 message GetUserResponse {
@@ -48,7 +48,7 @@ message GetUserResponse {
 }
 
 message UpdateUserRequest {
-   User user = 1;
+  User user = 1;
 }
 
 message UpdateUserResponse {
@@ -56,5 +56,5 @@ message UpdateUserResponse {
 }
 
 message DeleteUserRequest {
-  string uid = 1;
+  string id = 1;
 }

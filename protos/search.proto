@@ -1,0 +1,24 @@
+syntax = "proto3";
+package service;
+option go_package = "./service/search";
+import "google/api/annotations.proto";
+import "google/protobuf/empty.proto";
+import "option.proto";
+
+service SearchService {
+  rpc ListOptions(google.protobuf.Empty)returns (ListOptionsResponse){
+    option (google.api.http) = {
+      get: "/search/options"
+    };
+  }
+}
+
+message ListOption{
+  string id = 1;
+  OptionType type = 2;
+  string name = 3;
+}
+
+message ListOptionsResponse{
+  repeated ListOption options = 1;
+}
