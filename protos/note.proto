@@ -134,7 +134,8 @@ message GetNoteResponse {
 }
 
 message UpdateNoteRequest {
-  NoteRequest note = 1;
+  string id = 1;
+  NoteRequest note = 2;
 }
 
 message UpdateNoteResponse {

@@ -201,7 +201,7 @@ func RegisterEnterpriseServiceHandlerServer(ctx context.Context, mux *runtime.Se
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/service.EnterpriseService/CreateEnterprise")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/service.EnterpriseService/CreateEnterprise", runtime.WithHTTPPathPattern("/enterprise/create"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -224,7 +224,7 @@ func RegisterEnterpriseServiceHandlerServer(ctx context.Context, mux *runtime.Se
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/service.EnterpriseService/GetEnterprise")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/service.EnterpriseService/GetEnterprise", runtime.WithHTTPPathPattern("/enterprise/get"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -247,7 +247,7 @@ func RegisterEnterpriseServiceHandlerServer(ctx context.Context, mux *runtime.Se
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/service.EnterpriseService/UpdateEnterprise")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/service.EnterpriseService/UpdateEnterprise", runtime.WithHTTPPathPattern("/enterprise/update"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -270,7 +270,7 @@ func RegisterEnterpriseServiceHandlerServer(ctx context.Context, mux *runtime.Se
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/service.EnterpriseService/DeleteEnterprise")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/service.EnterpriseService/DeleteEnterprise", runtime.WithHTTPPathPattern("/enterprise/delete"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -293,7 +293,7 @@ func RegisterEnterpriseServiceHandlerServer(ctx context.Context, mux *runtime.Se
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/service.EnterpriseService/ListAllEnterprises")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/service.EnterpriseService/ListAllEnterprises", runtime.WithHTTPPathPattern("/enterprise/list"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -355,7 +355,7 @@ func RegisterEnterpriseServiceHandlerClient(ctx context.Context, mux *runtime.Se
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/service.EnterpriseService/CreateEnterprise")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/service.EnterpriseService/CreateEnterprise", runtime.WithHTTPPathPattern("/enterprise/create"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -375,7 +375,7 @@ func RegisterEnterpriseServiceHandlerClient(ctx context.Context, mux *runtime.Se
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/service.EnterpriseService/GetEnterprise")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/service.EnterpriseService/GetEnterprise", runtime.WithHTTPPathPattern("/enterprise/get"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -395,7 +395,7 @@ func RegisterEnterpriseServiceHandlerClient(ctx context.Context, mux *runtime.Se
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/service.EnterpriseService/UpdateEnterprise")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/service.EnterpriseService/UpdateEnterprise", runtime.WithHTTPPathPattern("/enterprise/update"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -415,7 +415,7 @@ func RegisterEnterpriseServiceHandlerClient(ctx context.Context, mux *runtime.Se
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/service.EnterpriseService/DeleteEnterprise")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/service.EnterpriseService/DeleteEnterprise", runtime.WithHTTPPathPattern("/enterprise/delete"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -435,7 +435,7 @@ func RegisterEnterpriseServiceHandlerClient(ctx context.Context, mux *runtime.Se
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/service.EnterpriseService/ListAllEnterprises")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/service.EnterpriseService/ListAllEnterprises", runtime.WithHTTPPathPattern("/enterprise/list"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return

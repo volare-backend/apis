@@ -1,5 +1,6 @@
 syntax = "proto3";
 package service;
+option go_package = "./service/page";
 
 message Page{
   string next_id = 1;
