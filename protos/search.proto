@@ -1,8 +1,9 @@
 syntax = "proto3";
-package search;
+package service;
 option go_package = "./service/search";
 import "google/api/annotations.proto";
 import "google/protobuf/empty.proto";
+import "option.proto";
 
 service SearchService {
   rpc ListOptions(google.protobuf.Empty)returns (ListOptionsResponse){
@@ -10,13 +11,6 @@ service SearchService {
       get: "/search/options"
     };
   }
-}
-
-enum OptionType {
-  Language = 0;
-  Framework = 1;
-  Tool = 2;
-  Company = 3;
 }
 
 message ListOption{

@@ -6,7 +6,8 @@ import "google/protobuf/empty.proto";
 import "google/api/annotations.proto";
 import "user.proto";
 import "enterprise.proto";
-import "search.proto";
+import "option.proto";
+import "page.proto";
 
 service NoteService {
   rpc CreateNote (CreateNoteRequest) returns (CreateNoteResponse) {
@@ -104,13 +105,13 @@ message NoteResponse {
   google.protobuf.Timestamp created_at = 22;
 }
 
-enum TechType {
-  Language = 0;
-  Framework = 1;
-  Tool = 2;
-}
-
 message Tech {
+  enum TechType {
+    Language = 0;
+    Framework = 1;
+    Tool = 2;
+  }
+
   string  id = 1;
   string  name = 2;
   TechType  type = 3;
@@ -150,9 +151,7 @@ message ListNotesRequest {
 
 message ListNotesResponse {
   repeated NoteRequest notes = 1;
-  uint32 current_page = 2;
-  uint32 total_pages = 3;
-  string next_id = 4;
+  Page page = 2;
 }
 
 enum Season {
@@ -181,12 +180,9 @@ message SearchOption {
 message SearchNotesRequest {
   string next_id = 1;
   repeated SearchOption options = 2;
-
 }
 
 message SearchNotesResponse {
   repeated NoteResponse note = 1;
-  uint32 current_page = 2;
-  uint32 total_pages = 3;
-  string next_id = 4;
+  Page page = 2;
 }
